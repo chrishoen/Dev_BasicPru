@@ -1,0 +1,70 @@
+{
+  "version": "0.2.1",
+  "outDir": "\"${workspaceRoot}\\bin\"",
+  "tasks": [
+    {
+      "taskName": "makefile-build",
+      "appliesTo": "makefile",
+      "type": "launch",
+      "contextType": "build",
+      "command": "C:/ti/ccs/ccs/utils/bin/gmake.exe",
+      "args": [
+        "-k all"
+      ],
+      "envVars": {
+        "VSCMD_START_DIR": "\"${workspaceRoot}\""
+      },
+      "problemMatcher": {
+        "owner": "c",
+        "fileLocation": [
+          "relative",
+          "${workspaceFolder}"
+        ],
+        "pattern": {
+          "regexp": "^(.*):(\\d+):(\\d+):\\s+(warning|error):\\s+(.*)$",
+          "file": 1,
+          "line": 2,
+          "column": 3,
+          "severity": 4,
+          "message": 5
+        }
+      }
+    },
+    {
+      "taskName": "makefile-clean",
+      "appliesTo": "makefile",
+      "type": "launch",
+      "contextType": "clean",
+      "command": "C:/ti/ccs/ccs/utils/bin/gmake.exe",
+      "args": [
+        "-k clean"
+      ],
+      "envVars": {
+        "VSCMD_START_DIR": "\"${workspaceRoot}\""
+      }
+    },
+    {
+      "taskName": "Install",
+      "appliesTo": "*",
+      "type": "default",
+      "contextType": "custom",
+      "command": "${env.COMSPEC}",
+      "args": [
+        "rsync -azv gen/prumsg1.out rsync://debian@bbx/cproc/pru"
+      ],
+      "envVars": {
+        "VSCMD_START_DIR": "\"${workspaceRoot}\""
+      }
+    },
+    {
+      "taskName": "task-Makefile",
+      "appliesTo": "Makefile",
+      "type": "launch"
+    },
+    {
+      "taskName": "task-Makefile",
+      "appliesTo": "Makefile",
+      "type": "launch"
+    }
+  ]
+}
