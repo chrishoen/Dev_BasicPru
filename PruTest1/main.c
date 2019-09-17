@@ -52,13 +52,14 @@ void main(){
 	/* Toggle GPO pins TODO: Figure out which to use */
 	gpio = 0x0020;
 
-	/* TODO: Create stop condition, else it will toggle indefinitely */
+   // Counter pointer in shared memory section.
+   int* tCounterPtr = (int*)0x10000;
+   *tCounterPtr = 1000;
+
+   /* TODO: Create stop condition, else it will toggle indefinitely */
 	while(1){
 		__R30 ^= gpio;
 		__delay_cycles(200000);
 	}
-
-	/* Halt the PRU core */
-	__halt();
 }
 
